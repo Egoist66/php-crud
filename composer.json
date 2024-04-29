@@ -1,0 +1,17 @@
+{
+    "name": "razor/php-crud",
+    "description": "ajax and mysql",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Classes\\": "functions/classes/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Farid Mahmudov",
+            "email": "Razormad666@gmail.com"
+        }
+    ],
+    "require": {}
+}
