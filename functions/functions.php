@@ -17,5 +17,6 @@ return [
     "save" => require_once __DIR__ . '/utils/save.php',
     "cropString" => require_once __DIR__ . '/utils/cropString.php',
     "dump" => require_once __DIR__ . '/utils/dump.php',
+    "prevent_fav" => require_once __DIR__ . '/utils/prevent-fav.php',
     
 ];

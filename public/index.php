@@ -1,4 +1,7 @@
 <?php
+
+use App\Controllers\AppController;
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -6,6 +9,7 @@ error_reporting(E_ALL);
 require_once '../functions/functions.php';
 require_once '../app/bootstrap.php';
 
+prevent_fav();
 
 $app = view('layout->main', [
     "parts" => [
@@ -22,8 +26,11 @@ $app = view('layout->main', [
             "deleteCityModal" => view('components->delete-city-modal')->render(),
             "editCityModal" => view('components->edit-city-modal')->render()
         ])->render(),
-        "cities" => view('components->cities-table',
-            ['pagination' => $pagination])->render()
+
+        "cities" => view('components->cities-table', [
+                'pagination' => PAGINATION,
+                'cities' => CITIES
+        ])->render()
     ]
 ]);
 

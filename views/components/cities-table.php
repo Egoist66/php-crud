@@ -45,7 +45,7 @@
             </tbody>
         </table>
 
-        <?= $pagination ?>
+        <?= PAGINATION ?>
 
     <?php else: ?>
 
