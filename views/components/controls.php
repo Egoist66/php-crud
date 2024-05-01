@@ -6,6 +6,7 @@
                 data-bs-toggle="modal" data-bs-target="#addCityModal"
                 id="add">Add city
             </button>
+
         </div>
     </div>
 

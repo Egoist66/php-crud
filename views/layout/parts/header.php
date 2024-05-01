@@ -13,5 +13,7 @@
 <body>
 
 <header class="py-3">
-    <h1 class="text-center  h2"><?= $title ?></h1>
+
+
+    <?=  $spinner ?>
 </header>

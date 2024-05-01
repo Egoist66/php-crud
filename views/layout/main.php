@@ -2,7 +2,7 @@
 
 <main>
    <div class="container">
-      <?= loop($ui, false, 50) ?>
+      <?= loop($ui, 'section', false, '50px 0px 50px 0px') ?>
    </div>
 </main>
 

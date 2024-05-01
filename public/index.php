@@ -13,9 +13,10 @@ prevent_fav();
 
 $app = view('layout->main', [
     "parts" => [
+
         "header" => view(
             'layout/parts->header',
-            ["title" => "Ajax and MySQL"])->render(),
+            ["title" => "Ajax and MySQL", "spinner" => view('components->spinner')->render()])->render(),
 
         "footer" => view('layout/parts->footer')->render(),
     ],
@@ -27,10 +28,10 @@ $app = view('layout->main', [
             "editCityModal" => view('components->edit-city-modal')->render()
         ])->render(),
 
-        "cities" => view('components->cities-table', [
-                'pagination' => PAGINATION,
-                'cities' => CITIES
-        ])->render()
+//        "cities" => view('components->cities-table', [
+//               'pagination' => PAGINATION,
+//                'cities' => CITIES
+//       ])->render()
     ]
 ]);
 

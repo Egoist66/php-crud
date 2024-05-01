@@ -38,7 +38,7 @@ class DB
 
         try {
             $this->connection = new PDO($dsn, $db_config['db']['username'], $db_config['db']['password'], $db_config['db']['options']);
-            echo "<script>console.log('DB Connected!')</script>";
+//            echo "<script>console.log('DB Connected!')</script>";
             return $this;
         } catch (PDOException $e) {
             echo "DB Error: {$e->getMessage()}";

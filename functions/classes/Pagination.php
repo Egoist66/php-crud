@@ -75,6 +75,8 @@ class Pagination
         $pages_left = '';
         $pages_right = '';
 
+
+
         if ($this->current_page > 1) {
             $back = "<li class='page-item'><a class='page-link' data-page='" . $this->current_page - 1 . "' href='" . $this->get_link($this->current_page - 1) . "'>&lt;</a></li>";
         }

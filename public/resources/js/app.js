@@ -6,7 +6,8 @@ class App {
 
         document.addEventListener('DOMContentLoaded', () => {
             const table = ajaxTable();
-            table.paginate();
+            table.paginate()
+
         })
     }
 }

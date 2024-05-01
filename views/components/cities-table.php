@@ -1,8 +1,18 @@
-<div class="cities table-responsive">
+<div class="cities ">
 
-    <?php if (!empty(CITIES)): ?>
+    <?php
+    loop(
+        $ui,
+        'div',
+        false,
+        '0px 0px 0px 0px',
+        'inner'
+    );
+    ?>
 
-        <table class="table table-hover">
+    <?php if (!empty($cities)): ?>
+
+        <table class="table table-hover table-responsive">
             <thead class="table-dark">
             <tr>
                 <th scope="col"># ID</th>
@@ -13,7 +23,7 @@
             </thead>
             <tbody>
 
-            <?php foreach (CITIES as $city) : ?>
+            <?php foreach ($cities as $city) : ?>
                 <tr id="city-<?= $city['id'] ?>">
                     <th scope="row"><?= $city['id'] ?></th>
                     <td><?= $city['name'] ?></td>
@@ -30,12 +40,13 @@
                         </button>
 
                         <button
-                            id=-<?= $city['id'] ?>"
-                            class="btn btn-danger btn-delete"
-                            data-bs-toggle="modal"
-                            data-bs-target="#deleteCity"
+                            id=<?= $city['id'] ?>"
+                            class=" btn btn-danger btn-delete
+                        "
+                        data-bs-toggle="modal"
+                        data-bs-target="#deleteCity"
                         >
-                            Delete
+                        Delete
                         </button>
                     </td>
                 </tr>
@@ -45,7 +56,7 @@
             </tbody>
         </table>
 
-        <?= PAGINATION ?>
+        <?= $pagination ?>
 
     <?php else: ?>
 

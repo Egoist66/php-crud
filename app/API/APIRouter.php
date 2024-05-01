@@ -3,17 +3,18 @@
 namespace App\API;
 
 use App\Services\Service;
+use JsonException;
 
 class APIRouter extends Service
 {
 
+    /**
+     * @throws JsonException
+     */
     public static function init(): void
     {
-       if(request()){
-           $action = $_GET['paginate'];
-           if ($action === 'cities') {
-               APIActions::action();
-           }
+       if(request('post') && $_SERVER['REQUEST_URI'] === '/api/cities') {
+           APIActions::action();
        }
     }
 }
