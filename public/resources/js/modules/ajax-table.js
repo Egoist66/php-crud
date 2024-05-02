@@ -1,5 +1,8 @@
 import {delay} from "../utils/delay.js";
 import {xhr} from "../utils/xhr.js";
+import {useAddCity} from "./addCity.js";
+import {useValidateFields} from "./validateFields.js";
+import {useEditCity} from "./getCityToEdit.js";
 
 /**
  * A function that sends a request to the server to fetch cities data.
@@ -25,7 +28,7 @@ export function useAjaxTable() {
         try {
             spinner.classList.add('active-spinner');
 
-            const response = await xhr({
+            xhr({
                 url: '/api/cities',
                 method: 'POST',
                 responseType: 'text',
@@ -37,16 +40,20 @@ export function useAjaxTable() {
                 }),
                 beforeResponse: async () => {
                     await delay(500);
+                },
+
+            }).then(response => {
+                if (response) {
+                    wrapper.innerHTML = response;
+                    spinner.classList.remove('active-spinner');
+                    document.body.classList.remove('loading');
+                    controls.classList.remove('loading');
+
+                    after();
                 }
             })
 
-            if (response) {
-                wrapper.innerHTML = response;
-                spinner.classList.remove('active-spinner');
-                document.body.classList.remove('loading');
-                controls.classList.remove('loading');
-                after();
-            }
+
         } catch (error) {
             console.log(error);
         }

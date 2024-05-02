@@ -27,7 +27,7 @@ export async function xhr({ url, method = 'GET', responseType = 'text', errorHan
             const result = await response.text();
 
             if(afterResponse) {
-                await afterResponse();
+                await afterResponse(result);
             }
             return result;
 

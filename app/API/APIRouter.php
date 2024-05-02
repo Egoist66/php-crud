@@ -20,5 +20,13 @@ class APIRouter extends Service
        if(request('post') && $_SERVER['REQUEST_URI'] === '/api/cities/add') {
            APIActions::createCity();
        }
+
+       if(request() && $_SERVER['REQUEST_URI'] === "/api/cities/show/?id={$_GET['id']}") {
+           APIActions::editCity();
+       }
+
+       if(request('put') && $_SERVER['REQUEST_URI'] === "/api/cities/edit/") {
+           APIActions::updateCity();
+       }
     }
 }

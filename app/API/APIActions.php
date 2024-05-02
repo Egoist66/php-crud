@@ -64,4 +64,27 @@ class APIActions
 
     }
 
+    /**
+     * @throws JsonException
+     */
+    #[NoReturn] final public static function editCity(): void
+    {
+        $cityId = (int)$_GET['id'];
+
+        $city = CitiesModel::getCity($cityId);
+        echo $city;
+
+        die();
+    }
+
+    #[NoReturn] final public static function updateCity(): void
+    {
+
+        $data = json_decode(file_get_contents("php://input"), true);
+        $city = CitiesModel::updateCity($data);
+        echo $city;
+
+        die();
+    }
+
 }

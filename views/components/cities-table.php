@@ -21,7 +21,18 @@
                     <td>
 
                         <button
-                            id=<?= $city['id'] ?>"
+                            id="<?= $city['id'] ?>"
+                            onclick="fetch('/api/cities/show/?id=' + this.id)
+                            .then(response => response.json())
+                            .then(data => {
+                                const editForm = document.querySelector('#editCity form')
+
+                                editForm.cityname.value = data.data.name
+                                editForm.citypopulation.value = data.data.population
+                                editForm.editCity.value = data.data.id
+                                editForm.setAttribute('data-id', data.data.id)
+                            })"
+
                             class="btn btn-outline-info btn-edit"
                             data-bs-toggle="modal"
                             data-bs-target="#editCity"
@@ -30,13 +41,12 @@
                         </button>
 
                         <button
-                            id=<?= $city['id'] ?>"
-                            class=" btn btn-outline-danger btn-delete
-                        "
-                        data-bs-toggle="modal"
-                        data-bs-target="#deleteCity"
+                            id="<?= $city['id'] ?>"
+                            title="Be careful with this action it can't be undone"
+                            onclick="fetch('/api/cities/delete/?id=' + this.id)"
+                            class="btn btn-outline-danger btn-delete"
                         >
-                        Delete
+                            Delete
                         </button>
                     </td>
                 </tr>
@@ -56,4 +66,5 @@
 
 
 </div>
+
 

@@ -22,7 +22,6 @@ $app = view('layout->main', [
         "footer" => view('layout/parts->footer')->render(),
         "controls" => view('components->controls', [
             "cityModal" => view('components->add-city-modal')->render(),
-            "deleteCityModal" => view('components->delete-city-modal')->render(),
             "editCityModal" => view('components->edit-city-modal')->render()
         ])->render(),
 

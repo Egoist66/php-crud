@@ -2,6 +2,8 @@
 
 namespace App\Model;
 
+use JsonException;
+
 class CitiesModel
 {
 
@@ -21,7 +23,7 @@ class CitiesModel
     }
 
     /**
-     * @throws \JsonException
+     * @throws JsonException
      */
     public static function addCity(array $data): bool|string
     {
@@ -42,5 +44,37 @@ class CitiesModel
         }
 
         return false;
+    }
+
+    /**
+     * @throws JsonException
+     */
+    public static function getCity(int $id): string {
+        return json_encode([
+            "id" => $id,
+            "data" => DBConnect->query("SELECT * FROM city WHERE id = ?", [$id])->find()
+        ], JSON_THROW_ON_ERROR);
+    }
+
+    /**
+     * @throws JsonException
+     */
+    public static function updateCity(array $data): string {
+        $name = sanitize($data['name']);
+        $population = sanitize($data['population']);
+        $id = sanitize($data['id']);
+
+
+        DBConnect->query("UPDATE city SET name = ?, population = ? WHERE id = ?", [
+            $name,
+            $population,
+            $id
+        ]);
+
+        return json_encode([
+            "message" => "City updated successfully",
+            "id" => $data['id'],
+            "data" => DBConnect->query("SELECT * FROM city WHERE id = ?", [$id])->find()
+        ], JSON_THROW_ON_ERROR);
     }
 }
