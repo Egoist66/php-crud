@@ -16,22 +16,21 @@ $app = view('layout->main', [
 
         "header" => view(
             'layout/parts->header',
-            ["title" => "Ajax and MySQL", "spinner" => view('components->spinner')->render()])->render(),
+            ["title" => "Ajax and MySQL"])->render(),
+        "spinner" => view('components->spinner')->render(),
 
         "footer" => view('layout/parts->footer')->render(),
-    ],
-
-    "ui" => [
         "controls" => view('components->controls', [
             "cityModal" => view('components->add-city-modal')->render(),
             "deleteCityModal" => view('components->delete-city-modal')->render(),
             "editCityModal" => view('components->edit-city-modal')->render()
         ])->render(),
 
+
+    ]
+]);
+
 //        "cities" => view('components->cities-table', [
 //               'pagination' => PAGINATION,
 //                'cities' => CITIES
 //       ])->render()
-    ]
-]);
-

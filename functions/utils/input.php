@@ -11,9 +11,9 @@ function input(array $attrs, array $required = []): array|null
 
         foreach ($required as $key) {
             if (!array_key_exists($key, $attrs) || empty($_POST[$key])) {
-                throw new \RuntimeException(
-                    "<div class='alert alert-danger rounded' style='text-align: center'>Field $key is required!</div>"
-                );
+
+                print_r(["error" => "<div class='alert alert-danger rounded' style='text-align: center'>Field $key is required!</div>"]);
+                die();
             }
         }
 

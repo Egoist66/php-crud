@@ -1,4 +1,4 @@
-<div class="controls">
+<div class="controls loading">
     <div class="row">
         <div class="col-12">
             <button

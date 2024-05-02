@@ -1,18 +1,8 @@
-<div class="cities ">
-
-    <?php
-    loop(
-        $ui,
-        'div',
-        false,
-        '0px 0px 0px 0px',
-        'inner'
-    );
-    ?>
+<div class="cities table-responsive ">
 
     <?php if (!empty($cities)): ?>
 
-        <table class="table table-hover table-responsive">
+        <table class="table table-hover">
             <thead class="table-dark">
             <tr>
                 <th scope="col"># ID</th>
@@ -31,8 +21,8 @@
                     <td>
 
                         <button
-                            id=-<?= $city['id'] ?>"
-                            class="btn btn-info btn-edit"
+                            id=<?= $city['id'] ?>"
+                            class="btn btn-outline-info btn-edit"
                             data-bs-toggle="modal"
                             data-bs-target="#editCity"
                         >
@@ -41,7 +31,7 @@
 
                         <button
                             id=<?= $city['id'] ?>"
-                            class=" btn btn-danger btn-delete
+                            class=" btn btn-outline-danger btn-delete
                         "
                         data-bs-toggle="modal"
                         data-bs-target="#deleteCity"

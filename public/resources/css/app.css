@@ -12,7 +12,7 @@
     visibility: hidden;
     opacity: 0;
     min-height: 100%;
-    z-index: 8888;
+    z-index: 20;
     transition: 0.3s ease-in-out;
     backdrop-filter: blur(4px);
 
@@ -24,8 +24,7 @@
     transition: 0.3s ease-in-out;
 }
 
-.loading {
-    overflow: hidden !important;
-    padding-right: 17px;
+.div:where(.swal2-container) {
+    z-index: 9999999999999999999999999999999999 !important;
 }
 

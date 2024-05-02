@@ -19,4 +19,28 @@ class CitiesModel
             ?->query('SELECT COUNT(*) FROM city')
             ?->findColumn();
     }
+
+    /**
+     * @throws \JsonException
+     */
+    public static function addCity(array $data): bool|string
+    {
+        if($data){
+            DBConnect
+                ?->query('INSERT INTO city (`name`, `population`) VALUES (?, ?)', [
+                    $data['cityname'],
+                    $data['citypopulation']
+                ]);
+
+
+            return json_encode([
+                "message" => "City added successfully",
+                "total" =>  self::getCitiesCount(),
+            ], JSON_THROW_ON_ERROR);
+
+
+        }
+
+        return false;
+    }
 }

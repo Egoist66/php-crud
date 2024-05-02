@@ -14,7 +14,11 @@ class APIRouter extends Service
     public static function init(): void
     {
        if(request('post') && $_SERVER['REQUEST_URI'] === '/api/cities') {
-           APIActions::action();
+           APIActions::getCities();
+       }
+
+       if(request('post') && $_SERVER['REQUEST_URI'] === '/api/cities/add') {
+           APIActions::createCity();
        }
     }
 }

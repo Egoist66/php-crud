@@ -46,17 +46,17 @@ class DB
         }
     }
 
-    final public function query($query, $params = []): DB | false
+    final public function query(string $query, array $params = []): DB | false
     {
         $this->stmt = $this->connection->prepare($query);
         try {
             $this->stmt->execute($params);
+            return $this;
         } catch (PDOException $e) {
             return false;
-            // echo "DB Error: {$e->getMessage()}";
-            // die;
+//             echo "DB Error: {$e->getMessage()}";
+//             die;
         }
-        return $this;
     }
 
     final public function find(): mixed

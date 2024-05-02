@@ -4,6 +4,7 @@ namespace App\API;
 
 use App\Model\CitiesModel;
 use Classes\Pagination;
+use Classes\Validator;
 use JetBrains\PhpStorm\NoReturn;
 use JsonException;
 use const App\Controllers\PER_PAGE;
@@ -14,7 +15,7 @@ class APIActions
     /**
      * @throws JsonException
      */
-    #[NoReturn] final public static function action(): void
+    #[NoReturn] final public static function getCities(): void
     {
         try {
             $data = json_decode(file_get_contents('php://input'), true, 512, JSON_THROW_ON_ERROR);
@@ -30,13 +31,7 @@ class APIActions
                 view('components->cities-table', [
                     'cities' => $cities,
                     'pagination' => $pagination,
-                    "ui" => [
-                        "controls" => view('components->controls', [
-                            "cityModal" => view('components->add-city-modal')->render(),
-                            "deleteCityModal" => view('components->delete-city-modal')->render(),
-                            "editCityModal" => view('components->edit-city-modal')->render()
-                        ])->render(),
-                    ]
+
                 ]);
 
                 die();
@@ -46,6 +41,27 @@ class APIActions
         } catch (\RuntimeException $e) {
             echo "Something went wrong: " . $e->getMessage();
         }
+    }
+
+    /**
+     * @throws JsonException
+     */
+    #[NoReturn] final public static function createCity(): void
+    {
+        $data = input([
+            'cityname' => 'string',
+            'citypopulation' => 'string',
+            'addCity' => 'string',
+        ], ['cityname', 'citypopulation', 'addCity']);
+
+
+        if (count($data) > 0 && $data['addCity'] === '1') {
+            $cities = CitiesModel::addCity($data);
+            print_r($cities);
+
+            die();
+        }
+
     }
 
 }

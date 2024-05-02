@@ -12,8 +12,4 @@
 </head>
 <body>
 
-<header class="py-3">
-
-
-    <?=  $spinner ?>
-</header>
+<header class="py-3"></header>
