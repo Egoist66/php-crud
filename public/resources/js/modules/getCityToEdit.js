@@ -11,7 +11,27 @@ export function useEditCity() {
     const editCityModal = document.getElementById('editCity');
     const submitForm = document.getElementById('edit-city-btn');
     const btnClose = document.querySelector('.btn-close');
+    const wrapper = document.querySelector('.wrapper');
 
+    const initEditCity = () => {
+        wrapper.addEventListener('click', (event) => {
+
+            if (event.target.classList.contains('btn-edit')) {
+                xhr({
+                    url: `/api/cities/show/?id=${event.target.id}`,
+                    method: 'GET',
+                    responseType: 'json',
+
+                    afterResponse: async (data) => {
+                        editCityForm.cityname.value = data.data.name
+                        editCityForm.citypopulation.value = data.data.population
+                        editCityForm.editCity.value = data.data.id
+                        editCityForm.setAttribute('data-id', data.data.id)
+                    }
+                })
+            }
+        })
+    }
 
 
     const editCity = () => {
@@ -73,5 +93,6 @@ export function useEditCity() {
 
     return {
         editCity,
+        initEditCity
     }
 }

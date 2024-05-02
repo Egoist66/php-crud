@@ -19,6 +19,7 @@ class App {
             table.paginate();
             fields.checkFields();
             city.createCity();
+            editCity.initEditCity();
             editCity.editCity();
 
 

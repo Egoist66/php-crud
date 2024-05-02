@@ -22,17 +22,6 @@
 
                         <button
                             id="<?= $city['id'] ?>"
-                            onclick="fetch('/api/cities/show/?id=' + this.id)
-                            .then(response => response.json())
-                            .then(data => {
-                                const editForm = document.querySelector('#editCity form')
-
-                                editForm.cityname.value = data.data.name
-                                editForm.citypopulation.value = data.data.population
-                                editForm.editCity.value = data.data.id
-                                editForm.setAttribute('data-id', data.data.id)
-                            })"
-
                             class="btn btn-outline-info btn-edit"
                             data-bs-toggle="modal"
                             data-bs-target="#editCity"
