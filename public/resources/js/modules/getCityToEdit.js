@@ -47,6 +47,10 @@ export function useEditCity() {
                     name: this.cityname.value,
                     population: this.citypopulation.value
                 }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-Token': document.querySelector('[name="csrf_token"]').value
+                },
                 beforeResponse: async () => {
                     await delay(1000);
                 },
@@ -54,19 +58,28 @@ export function useEditCity() {
                     submitForm.disabled = true;
                     submitForm.textContent = 'Editing...';
                 },
-                afterResponse: async (data) => {
+                afterResponse: async (data, response) => {
+                    document.querySelector('input[name="csrf_token"]').value = response.headers.get('X-CSRF-Token');
+
                     console.log(data)
                     submitForm.disabled = false;
                     Swal.fire({
                         title: data.message,
-                        icon: 'success',
+                        icon: data.status,
                         confirmButtonText: 'Cool',
                         confirmButtonColor: '#0d6efd',
                         cancelButtonText: 'Cancel',
+
+                    }).then(() => {
+                        if(data.status === 'success' ){
+                            window.location.reload()
+
+                        }
                     })
                     await requestData(+document.querySelector('.page-item.active').textContent)
-
                     submitForm.textContent = 'Edit changes';
+
+
 
 
 

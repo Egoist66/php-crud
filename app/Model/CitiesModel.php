@@ -27,7 +27,7 @@ class CitiesModel
      */
     public static function addCity(array $data): bool|string
     {
-        if($data){
+        if ($data) {
             DBConnect
                 ?->query('INSERT INTO city (`name`, `population`) VALUES (?, ?)', [
                     $data['cityname'],
@@ -37,7 +37,7 @@ class CitiesModel
 
             return json_encode([
                 "message" => "City added successfully",
-                "total" =>  self::getCitiesCount(),
+                "total" => self::getCitiesCount(),
             ], JSON_THROW_ON_ERROR);
 
 
@@ -49,7 +49,8 @@ class CitiesModel
     /**
      * @throws JsonException
      */
-    public static function getCity(int $id): string {
+    public static function getCity(int $id): string
+    {
         return json_encode([
             "id" => $id,
             "data" => DBConnect->query("SELECT * FROM city WHERE id = ?", [$id])->find()
@@ -59,7 +60,8 @@ class CitiesModel
     /**
      * @throws JsonException
      */
-    public static function updateCity(array $data): string {
+    public static function updateCity(array $data): string
+    {
         $name = sanitize($data['name']);
         $population = sanitize($data['population']);
         $id = sanitize($data['id']);
@@ -74,7 +76,45 @@ class CitiesModel
         return json_encode([
             "message" => "City updated successfully",
             "id" => $data['id'],
+            'status' => 'success',
             "data" => DBConnect->query("SELECT * FROM city WHERE id = ?", [$id])->find()
         ], JSON_THROW_ON_ERROR);
+    }
+
+    /**
+     * @throws JsonException
+     */
+    public static function deleteCity(array $data): string
+    {
+        $id = sanitize($data['id']);
+
+        if (DBConnect->query("DELETE FROM city WHERE id = ?", [$id])) {
+
+            return json_encode([
+                "id" => $id,
+                "message" => "City Deleted successfully",
+
+            ], JSON_THROW_ON_ERROR);
+
+        }
+
+        return json_encode([
+            "message" => "Unable to delete",
+        ], JSON_THROW_ON_ERROR);
+    }
+
+
+    public static function findCities(string $query): array
+    {
+        $q = sanitize($query);
+        $template = "%{$q}%";
+        $res = DBConnect->query("SELECT * FROM city WHERE name LIKE ?", [$template])->findAll();
+
+        if(count($res) > 0) {
+            return $res;
+        }
+
+        return [];
+
     }
 }

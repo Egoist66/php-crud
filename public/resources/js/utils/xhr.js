@@ -19,7 +19,7 @@ export async function xhr({ url, method = 'GET', responseType = 'text', errorHan
 
                 const result = await response.json();
                 if(afterResponse) {
-                    await afterResponse(result);
+                    await afterResponse(result, response);
                 }
                 return result;
             }
@@ -27,17 +27,17 @@ export async function xhr({ url, method = 'GET', responseType = 'text', errorHan
             const result = await response.text();
 
             if(afterResponse) {
-                await afterResponse(result);
+                await afterResponse(result,response);
             }
             return result;
 
         }
         else {
-            errorHandler('Something went wrong');
+            errorHandler(`Operation failed - ${response.status} ${response.statusText}`);
         }
 
     } catch (error) {
-        errorHandler('Something went wrong');
+        errorHandler('Something went wrong!');
 
     }
 }

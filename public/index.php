@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 use App\Controllers\AppController;
 
@@ -33,3 +34,5 @@ $app = view('layout->main', [
 //               'pagination' => PAGINATION,
 //                'cities' => CITIES
 //       ])->render()
+
+//dump($_SESSION);

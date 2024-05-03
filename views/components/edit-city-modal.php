@@ -7,6 +7,9 @@
             </div>
             <div class="modal-body">
                 <form method="post" id="editCityForm">
+                    <div class="mb-3 d-none">
+                        <input name="csrf_token" value="<?= generate_csrf_token() ?>" type="hidden">
+                    </div>
                     <div class="mb-3">
                         <label for="city-name" class="form-label">Name</label>
                         <input required name="cityname" placeholder="Change city name" type="text"

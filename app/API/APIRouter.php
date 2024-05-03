@@ -25,8 +25,26 @@ class APIRouter extends Service
            APIActions::editCity();
        }
 
-       if(request('put') && $_SERVER['REQUEST_URI'] === "/api/cities/edit/") {
-           APIActions::updateCity();
+       if(request('put')) {
+           validate_csrf_token_with_header();
+
+           if(str_contains($_SERVER['REQUEST_URI'], '/api/cities/edit')) {
+               APIActions::updateCity();
+           }
+
        }
+
+        if(request('delete')) {
+            validate_csrf_token_with_header();
+
+            if($_SERVER['REQUEST_URI'] === '/api/cities/delete') {
+                APIActions::deleteCity();
+            }
+
+        }
+
+        if(request('get') && str_contains($_SERVER['REQUEST_URI'], '/api/cities/find')) {
+            APIActions::findCities();
+        }
     }
 }

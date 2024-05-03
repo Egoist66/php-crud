@@ -32,7 +32,6 @@
                         <button
                             id="<?= $city['id'] ?>"
                             title="Be careful with this action it can't be undone"
-                            onclick="fetch('/api/cities/delete/?id=' + this.id)"
                             class="btn btn-outline-danger btn-delete"
                         >
                             Delete

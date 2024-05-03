@@ -77,12 +77,56 @@ class APIActions
         die();
     }
 
+    /**
+     * @throws JsonException
+     */
     #[NoReturn] final public static function updateCity(): void
     {
 
         $data = json_decode(file_get_contents("php://input"), true);
-        $city = CitiesModel::updateCity($data);
-        echo $city;
+        if (empty($data['name']) || empty($data['population'])) {
+            echo json_encode([
+                'message' => 'Please fill all fields',
+                'status' => 'error'
+            ], JSON_THROW_ON_ERROR);
+            die();
+        }
+
+
+        $response = CitiesModel::updateCity($data);
+        echo $response;
+        die();
+    }
+
+    /**
+     * @throws JsonException
+     */
+    #[NoReturn] final public static function deleteCity(): void
+    {
+
+        $data = json_decode(file_get_contents("php://input"), true);
+        $response = CitiesModel::deleteCity($data);
+        echo $response;
+
+
+        die();
+    }
+
+
+    /**
+     * @throws JsonException
+     */
+    #[NoReturn] final public static function findCities(): void
+    {
+
+        $query = $_GET['q'] ?? '';
+        $cities = CitiesModel::findCities($query);
+
+        view('components->cities-table', [
+            'cities' => $cities,
+            'pagination' => PAGINATION,
+
+        ]);
 
         die();
     }
