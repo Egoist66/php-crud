@@ -30,8 +30,9 @@ export function useDeleteCity() {
                         event.target.disabled = true;
                         event.target.textContent = 'Deleting...';
                     },
-                    afterResponse: async (data, token) => {
-                        document.querySelector('input[name="csrf_token"]').value = token;
+                    afterResponse: async (data, response) => {
+                        console.log(response.headers.get('X-CSRF-Token'))
+                        document.querySelector('input[name="csrf_token"]').value = response.headers.get('X-CSRF-Token');
 
                         console.log(data)
                         event.target.disabled = false;
